@@ -1,0 +1,39 @@
+{
+  "name": "@mindbox/quokka-ts",
+  "version": "0.0.1",
+  "description": "Mindbox.Quokka Typescript implementation",
+  "main": "index.js",
+  "scripts": {
+    "test": "webpack && karma start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mindbox-moscow/Quokka.Ts.git"
+  },
+  "keywords": [
+    "Quokka",
+    "Templating"
+  ],
+  "author": "Mindbox",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/mindbox-moscow/Quokka.Ts/issues"
+  },
+  "homepage": "https://github.com/mindbox-moscow/Quokka.Ts#readme",
+  "devDependencies": {
+    "@types/jasmine": "^3.3.0",
+    "karma": "^3.1.1",
+    "karma-jasmine": "^2.0.1",
+    "karma-mocha-reporter": "^2.2.5",
+    "karma-typescript": "^3.0.13",
+    "puppeteer": "^1.10.0",
+    "ts-loader": "^5.3.0",
+    "typescript": "^3.1.6",
+    "webpack": "^4.26.0",
+    "webpack-cli": "^3.1.2"
+  },
+  "dependencies": {
+    "antlr4ts": "^0.4.1-alpha.0",
+    "karma-chrome-launcher": "^2.2.0"
+  }
+}
