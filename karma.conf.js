@@ -36,16 +36,7 @@ module.exports = function(config) {
       reporters: ['mocha', 'karma-typescript'], //, 'coverage'
 
       karmaTypescriptConfig: {
-          /*
-          compilerOptions: {
-            "target": "es2015",
-            "module": "commonjs",
-            "declaration": true,
-            "outDir": "./dist",
-            "sourceMap": true,
-            "experimentalDecorators": true
-        }*/
-        tsconfig: "./tsconfig.json"
+        tsconfig: "./tests.tsconfig.json"
       },
 
       // web server port

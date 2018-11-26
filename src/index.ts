@@ -1,1 +1,2 @@
-export * from "./Quokka";
+import * as Quokka from "./quokka";
+export = Quokka;

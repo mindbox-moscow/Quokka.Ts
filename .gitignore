@@ -5,3 +5,4 @@ dist/
 node_modules/
 jspm_packages/
 coverage/
+*.tgz
