@@ -1,7 +1,15 @@
 module.exports = {
-    entry: "./src/index",
+
+    mode: "development",
+
+    entry: [
+        "@babel/polyfill",
+        "./src/index.ts"
+    ],
+
     output: {
-    	filename: "./dist/index.js",
+        filename: "index.js",
+        libraryTarget: 'umd'
     },
 
     resolve: {
@@ -11,8 +19,17 @@ module.exports = {
     
     module: {
         rules: [
-          // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
-          { test: /\.ts$/, loader: "ts-loader" }
-      ],
+            // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
+            { 
+                test: /\.ts$/, 
+                loaders: ["babel-loader", "ts-loader"], 
+                exclude: /node_modules/
+            }
+        ]
+    },
+
+    performance: {
+        maxEntrypointSize: 500000,
+        maxAssetSize: 500000
     }
 };

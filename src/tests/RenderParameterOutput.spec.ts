@@ -1,4 +1,4 @@
-import { Template } from "../Quokka";
+import { Template } from "../quokka";
 
 describe(
 	"Rendering of parameter output",
