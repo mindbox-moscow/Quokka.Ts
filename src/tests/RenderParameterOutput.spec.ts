@@ -59,5 +59,18 @@ describe(
 
 			expect(result).toEqual("ES-335");
 		});
+		
+		it("Parameter names with underscores are supported",
+		() => {
+			const template = new Template("${ _prefix } ${ in_fix } ${ suffix_ }");
+			
+			const result = template.render({
+				"_prefix": "Hope",
+				"in_fix": "Empire",
+				"suffix_": "Return",
+			});
+
+			expect(result).toEqual("Hope Empire Return");
+		});
 	}
 );

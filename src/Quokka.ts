@@ -34,52 +34,6 @@ export class Template {
 	}
 }
 
-export const renderTemplate = (template: string) : string => {
-
-	const sample1 = "Шаблон с ${parameter}-строкой";
-	const sample2 = "${ Thunder() } feel the ${ Oscillate(A, 'b', \"c\") }";
-	const sample3 = "${ Thunder() } feel";
-	const sample4 = "${ DiscoverStrings(\"Stone\", 'Temple', \"Pilots\") }";
-	const sample5 = "${ number } ${ ErsatzForms(number, \"бутылка\", 'бутылки', \"бутылок\") }";
-
-	const chars = new ANTLRInputStream(sample5);
-	const lexer = new QuokkaLex(chars);
-	const tokens = new CommonTokenStream(lexer);
-	const parser = new Parsing.QuokkaParser(tokens);
-
-	const rootContext = parser.template();
-	var result = new TemplateVisitor().visit(rootContext);
-
-	return result.render({
-		compositeModelValue: {
-			"parameter": "Dance Dance Dance",
-			"number": 1102 
-		},
-
-		functionRegistry: {
-			"Thunder": () => {
-				return "Hear the thunder";
-			},
-
-			"DiscoverStrings": (a: string, b: string, c: string) => {
-				return `A = ${a}, B = ${b}, C = ${c}`;
-			},
-
-			"Oscillate": (a: number, b: string, c: string) => {
-				return "Dopamine.";
-			},
-
-			"ErsatzForms": (a: number, form1: string, form2: string, formN: string) : string => {
-				if (a % 10 == 1 && a % 100 != 11)
-					return form1;
-				if (a % 10 == 2 && a % 100 != 12)
-					return form2;
-				return formN;
-			}
-		}
-	});
-};
-
 interface RenderContext {
 	compositeModelValue: Object;
 	functionRegistry: { [name: string]: Function };
@@ -108,7 +62,7 @@ class TemplateBlock implements TemplateNode {
 	}
 
 	public render(renderContext: RenderContext) {
-		let result = "";			
+		let result = "";
 
 		for (const child of this.children) {
 			result += child.render(renderContext);
@@ -179,14 +133,14 @@ class VariableValueExpression implements VariantValueExpression {
 	}
 
 	public evaluate(renderContext: RenderContext) {
-		const variableValue = Object
+		const variableValueKey = Object
 			.getOwnPropertyNames(renderContext.compositeModelValue)
 			.find(name => name.toLowerCase() === this.variableName.toLowerCase());
 
-		if (variableValue)
-			return renderContext.compositeModelValue[variableValue];
+		if (variableValueKey)
+			return renderContext.compositeModelValue[variableValueKey];
 
-		return renderContext.compositeModelValue[this.variableName];
+		throw new Error(`Variable ${this.variableName} not found`);
 	}
 }
 
@@ -201,10 +155,20 @@ class FunctionCallExpression implements VariantValueExpression {
 	}
 
 	public evaluate(renderContext: RenderContext) {
-		return renderContext.functionRegistry[this.functionName]
-			.apply(
-				null, 
-				this.functionArguments.map(arg => arg.evaluate(renderContext)));
+
+		const templateFunctionKey = Object
+			.getOwnPropertyNames(renderContext.functionRegistry)
+			.find(name => name.toLowerCase() === this.functionName.toLowerCase());
+
+		if (templateFunctionKey)
+		{
+			return renderContext.functionRegistry[templateFunctionKey]
+				.apply(
+					null, 
+					this.functionArguments.map(arg => arg.evaluate(renderContext)));
+		}
+
+		throw new Error(`Function ${this.functionName} not found`);
 	}
 }
 
