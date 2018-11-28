@@ -72,5 +72,16 @@ describe(
 
 			expect(result).toEqual("Hope Empire Return");
 		});
+
+
+		it("Parameter is undefined",
+		() => {
+			const template = new Template("${ UnknownParameter }");
+
+			expect(() => {
+				template.render();
+			})
+			.toThrowError("Value for variable \"UnknownParameter\" not found");
+		})
 	}
 );

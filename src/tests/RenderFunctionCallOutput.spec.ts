@@ -84,17 +84,33 @@ describe(
 
 			expect(result).toEqual("[Variable value]");
 		});
-		/*
+
+		
 		it("Function with two integer parameters",
 		() => {
 			const template = new Template(
-				"${ Add2Arguments() }",
+				"${ Add2Arguments(a, b) }",
 				 functionRegistry);
 			
-			const result = template.render();
+			const result = template.render({
+				"a": 40,
+				"b": 59
+			});
 
-			expect(result).toEqual("UnoDosTres");
+			expect(result).toEqual("99");
 		});
-		*/
+		
+		
+		it("Function parameter is undefined",
+		() => {
+			const template = new Template(
+				"${ AddSquareBrackets(UnknownParameter) }",
+				functionRegistry);
+
+			expect(() => {
+				template.render();
+			})
+			.toThrowError("Value for variable \"UnknownParameter\" not found");
+		})
 	}
 );

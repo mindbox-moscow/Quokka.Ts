@@ -1,9 +1,10 @@
+var path = require('path');
+
 module.exports = {
 
     mode: "development",
 
     entry: [
-        "@babel/polyfill",
         "./src/index.ts"
     ],
 
@@ -24,7 +25,23 @@ module.exports = {
                 test: /\.ts$/, 
                 loaders: ["babel-loader", "ts-loader"], 
                 exclude: /node_modules/
+            },
+            
+            {
+                test: /\.js$/,
+                use: {
+                    loader: "babel-loader",
+                    options: {
+                        presets: ['@babel/preset-env']
+                    }
+                },
+                include: [
+                    // antlr4ts targets es2015 and we want our library to target es5
+                    path.resolve(__dirname, "node_modules/antlr4ts")
+                ],
+                
             }
+            
         ]
     },
 
