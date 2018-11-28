@@ -26,7 +26,7 @@ export class VariableValueExpression implements VariantValueExpression {
 		if (variableValueKey)
 			return renderContext.compositeModelValue[variableValueKey];
 
-		throw new Error(`Variable ${this.variableName} not found`);
+		throw new Error(`Value for variable "${this.variableName}" not found`);
 	}
 }
 

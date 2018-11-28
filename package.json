@@ -1,6 +1,6 @@
 {
   "name": "@mindbox/quokka",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Mindbox.Quokka Typescript implementation",
   "main": "index.js",
   "types": "index.d.ts",
@@ -30,6 +30,7 @@
     "@babel/core": "^7.1.6",
     "@babel/preset-env": "^7.1.6",
     "@types/jasmine": "^3.3.0",
+    "antlr4ts-cli": "^0.4.0-alpha.4",
     "babel-loader": "^8.0.0-beta.0",
     "karma": "^3.1.1",
     "karma-chrome-launcher": "^2.2.0",
@@ -43,7 +44,6 @@
     "webpack-cli": "^3.1.2"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.0.0",
     "antlr4ts": "^0.4.1-alpha.0"
   }
 }
