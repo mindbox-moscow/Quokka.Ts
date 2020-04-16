@@ -30,13 +30,15 @@ jobs:
     - name: Install dependencies
       run: npm ci
 
-    - name: Prepare package
-      run: npm run prepare
-
     - name: Run tests
       run: npm test
 
     - name: Publish
-      run: npm publish
+      run: |
+        npm config set //registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN
+        npm config set scope "@mindbox"
+        npm config list
+        npm publish --access public 
       env:
-        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        CI: true
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
