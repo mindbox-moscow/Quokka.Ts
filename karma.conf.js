@@ -1,6 +1,6 @@
 // Karma configuration
 
-process.env.CHROME_BIN = require('puppeteer').executablePath();
+process.env.CHROMIUM_BIN = require('puppeteer').executablePath();
 
 module.exports = function(config) {
   config.set({
@@ -58,7 +58,23 @@ module.exports = function(config) {
 
       // start these browsers
       // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-      browsers: ['ChromeHeadless'],
+      browsers: ['HeadlessChromium'],
+      customLaunchers: {
+        HeadlessChromium: {
+          base: 'ChromiumHeadless',
+          flags: [
+            '--no-sandbox',
+            '--remote-debugging-port=9222',
+            '--enable-logging',
+            '--user-data-dir=./karma-chrome',
+            '--v=1',
+            '--disable-background-timer-throttling',
+            '--disable-renderer-backgrounding',
+            '--proxy-bypass-list=*',
+            '--proxy-server=\'direct://\''
+         ]
+        }
+      },
 
 
       // Continuous Integration mode
