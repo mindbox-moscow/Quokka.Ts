@@ -1,5 +1,8 @@
 # Quokka.Ts
 
+
+![master](https://github.com/mindbox-moscow/Quokka.Ts/workflows/master/badge.svg) ![npm](https://img.shields.io/npm/v/@mindbox/quokka)
+
 Mindbox.Quokka Typescript implementation.
 
 For now, only a subset of Quokka constructs is supported:
